@@ -41,7 +41,8 @@ function render(action) {
 const sampleTable = initTable({
     tableTemplate: 'table',
     rowTemplate: 'row',
-    before: [],
+    //before: [],
+    before: ['header'],
     after: []
 }, render);
 
