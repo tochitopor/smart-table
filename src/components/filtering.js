@@ -12,6 +12,7 @@ export function initFiltering(elements, indexes) {
                       .map(name => {                        // используйте name как значение и текстовое содержимое
                         let opt = document.createElement('option');
                         opt.textContent = name;
+                        opt.value = name;
                         return opt;                                 // @todo: создать и вернуть тег опции
                       })
         )
