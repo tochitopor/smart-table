@@ -44,9 +44,8 @@ async function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let query = {}; // копируем для последующего изменения
     // result = applySearching(result, state, action); // поиск
-    // result = applyFiltering(result, state, action); // фильтрация
+    query  = applyFiltering(query, state, action); // фильтрация
     // result = applySorting(result, state, action); // сортировка
-    // result = applyPagination(result, state, action); // использование
     query = applyPagination(query, state, action); // обновляем query
 
     const { total, items } = await api.getRecords(query); // запрашиваем данные с собранными параметрами
@@ -80,9 +79,7 @@ const applySorting = initSorting([        // Нам нужно передать 
     sampleTable.header.elements.sortByTotal
 ]); 
 
-// const applyFiltering = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
-//     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
-// });
+const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements);    // передаём элементы фильтра
 
 const applySearching = initSearching('search');
 
@@ -92,6 +89,10 @@ appRoot.appendChild(sampleTable.container);
 
 async function init() {
     const indexes = await api.getIndexes();
+
+    updateIndexes(sampleTable.filter.elements, {
+        searchBySeller: indexes.sellers
+    });
 }
 
  init().then(render);// если init выполниться успешно, будет вызван callback переданный в then()
