@@ -43,7 +43,7 @@ function collectState() {
 async function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let query = {}; // копируем для последующего изменения
-    // result = applySearching(result, state, action); // поиск
+    query = applySearching(query, state, action); // поиск
     query  = applyFiltering(query, state, action); // фильтрация
     // result = applySorting(result, state, action); // сортировка
     query = applyPagination(query, state, action); // обновляем query
