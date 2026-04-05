@@ -44,8 +44,8 @@ async function render(action) {
     let state = collectState(); // состояние полей из таблицы
     let query = {}; // копируем для последующего изменения
     query = applySearching(query, state, action); // поиск
-    query  = applyFiltering(query, state, action); // фильтрация
-    // result = applySorting(result, state, action); // сортировка
+    query = applyFiltering(query, state, action); // фильтрация
+    query = applySorting(query, state, action); // сортировка
     query = applyPagination(query, state, action); // обновляем query
 
     const { total, items } = await api.getRecords(query); // запрашиваем данные с собранными параметрами
